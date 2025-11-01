@@ -3,8 +3,11 @@ Este projeto é destinado a fins educacionais, sendo a implementação em Lingua
 
 # ENTRADA DE DADOS
 Os dados de alerta são fornecidos em arquivos CSV no formato:
+
 idUsuario;timestamp;br;km;tipoAlerta
+
 12;1761610320;101;10.5;A
+
 15;1761610330;232;121.3;C
 
 # FUNCIONALIDADES
