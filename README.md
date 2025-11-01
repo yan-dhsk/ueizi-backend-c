@@ -22,5 +22,5 @@ idUsuario;timestamp;br;km;tipoAlerta
 - Execute o programa e utilize e siga as instruções do menu.
 
 #AUTORES
-[Yan Neves](https://github.com/yan-dhsk)
-[Vinicius Meneses](https://github.com/viniciusmeneses-maker)
+- [Yan Neves](https://github.com/yan-dhsk)
+- [Vinicius Meneses](https://github.com/viniciusmeneses-maker)
