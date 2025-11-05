@@ -23,4 +23,5 @@ idUsuario;timestamp;br;km;tipoAlerta
 
 # AUTORES
 - [Yan Neves](https://github.com/yan-dhsk)
-- [Vinicius Meneses](https://github.com/viniciusmeneses-maker)
+- [Vinicius Meneses](https://github.com/viniciusmeneses-tech)
+- [Jorge Henrique](https://github.com/jorgecombe-cloud)
