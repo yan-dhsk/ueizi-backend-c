@@ -18,15 +18,21 @@ typedef struct Rua {
 
 Estrada* carregarArquivo(char nomeArquivo[]);
 Estrada* carregarConsolidado(char nomeConsolidado[]);
-void processarArquivo (Estrada **estradasPonteiro, int br, float trechoDaBr, char tipo);
-void compararArquivos (Estrada *estradas, Estrada *dados);
+void processarArquivo (Estrada **estradasPonteiro, int br, float trechoDaBr, char tipo, int upvotesParaAdicionar);
+void compararArquivos (Estrada **listaConsolidadaPonteiro, Estrada *listaNovosAlertas);
 void salvarArquivo(Estrada *estrada, char nomeConsolidado[]);
+void liberarLista(Estrada *lista);
 
 void main(){
     char nomeArquivo[] = "alertas_100000_1.csv";
     char nomeConsolidado[] = "dadosConsolidados.csv";
-    carregarArquivo (nomeArquivo);
-    carregarConsolidado(nomeConsolidado);
+
+    Estrada *listaConsolidada = carregarConsolidado(nomeConsolidado);
+    Estrada *listaNovosAlertas = carregarArquivo(nomeArquivo);
+    compararArquivos(&listaConsolidada, listaNovosAlertas);
+    salvarArquivo(listaConsolidada, nomeConsolidado);
+    liberarLista(listaConsolidada);
+    liberarLista(listaNovosAlertas);
 }
 
 Estrada* carregarArquivo (char nomeArquivo[]){
@@ -38,13 +44,14 @@ Estrada* carregarArquivo (char nomeArquivo[]){
     int lixo1, lixo2, br;
     float trechoDaBr;
     char tipo;
-    int controle = 0;
+    char lixoBuffer[256];
+    if (fgets(lixoBuffer, sizeof(lixoBuffer), carregado) == NULL) {
+        printf("Erro ao ler o cabeçalho do arquivo ou arquivo vazio.\n");
+        fclose(carregado);
+        return NULL;
+    }
     Estrada *estradas = NULL;
     while (fscanf (carregado, "%d;%d;%d;%f;%c", &lixo1, &lixo2, &br, &trechoDaBr, &tipo) == 5){
-        if (controle == 0) {
-            controle++;
-            continue;
-        }
         float parteInteira = floorf(trechoDaBr);
         float parteFracionaria = trechoDaBr - parteInteira;
         if (parteFracionaria < 0.5) {
@@ -52,13 +59,13 @@ Estrada* carregarArquivo (char nomeArquivo[]){
         } else {
             trechoDaBr = parteInteira + 0.5;
         }
-        processarArquivo(&estradas, br, trechoDaBr, tipo);
+        processarArquivo(&estradas, br, trechoDaBr, tipo, 1);
     }
     fclose(carregado);
     return estradas;
 }
 
-void processarArquivo (Estrada **estradasPonteiro, int br, float trechoDaBr, char tipo) {
+void processarArquivo (Estrada **estradasPonteiro, int br, float trechoDaBr, char tipo, int upvotesParaAdicionar) {
     Estrada *copia = *estradasPonteiro;
     Estrada *ultimoNoBR = NULL;
 
@@ -71,7 +78,7 @@ void processarArquivo (Estrada **estradasPonteiro, int br, float trechoDaBr, cha
                 Trecho *noTrecho = (Trecho*) malloc(sizeof(Trecho));
                 noTrecho->tipo = tipo;
                 noTrecho->trechoDaBr = trechoDaBr;
-                noTrecho->upvotes = 1;
+                noTrecho->upvotes = upvotesParaAdicionar;
                 noTrecho->proximo = NULL;
                 copia->inicioTrecho = noTrecho;
                 return;
@@ -79,7 +86,7 @@ void processarArquivo (Estrada **estradasPonteiro, int br, float trechoDaBr, cha
 
             while (copia2 != NULL) {
                 if (trechoDaBr == copia2->trechoDaBr) {
-                    copia2->upvotes++;
+                    copia2->upvotes += upvotesParaAdicionar;
                     return;
                 }
                 copia3 = copia2;
@@ -89,7 +96,7 @@ void processarArquivo (Estrada **estradasPonteiro, int br, float trechoDaBr, cha
             Trecho *noTrecho = (Trecho*) malloc(sizeof(Trecho));
             noTrecho->tipo = tipo;
             noTrecho->trechoDaBr = trechoDaBr;
-            noTrecho->upvotes = 1;
+            noTrecho->upvotes = upvotesParaAdicionar;
             noTrecho->proximo = NULL;
             copia3->proximo = noTrecho;
             return;
@@ -115,7 +122,7 @@ void processarArquivo (Estrada **estradasPonteiro, int br, float trechoDaBr, cha
     noBR->inicioTrecho = noTrecho;
     noTrecho->tipo = tipo;
     noTrecho->trechoDaBr = trechoDaBr;
-    noTrecho->upvotes = 1;
+    noTrecho->upvotes = upvotesParaAdicionar;
     noTrecho->proximo = NULL;
 
     if (*estradasPonteiro == NULL) {
@@ -134,18 +141,18 @@ Estrada* carregarConsolidado(char nomeConsolidado[]){
         return NULL;
     }
     Estrada *dados = NULL;
-    int controle = 0;
     int br, upvotes;
     float trecho;
     char tipo;
     Estrada *copia = NULL;
+    char lixoBuffer[256];
+    if (fgets(lixoBuffer, sizeof(lixoBuffer), consolidado) == NULL) {
+        printf("Erro ao ler o cabeçalho do arquivo consolidado ou arquivo vazio.\n");
+        fclose(consolidado);
+        return NULL;
+    }
 
     while (fscanf(consolidado, "%d;%f;%c;%d", &br, &trecho, &tipo, &upvotes) == 4){
-        if (controle == 0){
-            controle++;
-            continue;
-        }
-
         int brEncontrada = 0;
 
         if (dados == NULL) {
@@ -175,7 +182,6 @@ Estrada* carregarConsolidado(char nomeConsolidado[]){
                     noTrecho->upvotes = upvotes;
                     noTrecho->proximo = NULL;
                     trecho2->proximo = noTrecho;
-
                     brEncontrada = 1;
                     break;
                 }
@@ -208,16 +214,49 @@ void salvarArquivo(Estrada *estrada, char nomeConsolidado[]){
         return;
     }
     Estrada *copia = estrada;
-
     fprintf(salvo, "br;trecho;tipo;upvotes\n");
     while (copia != NULL) {
         Trecho *copia2 = copia->inicioTrecho;
         while (copia2 != NULL) {
-            fprintf(salvo, "%d;%f;%c;%d\n", copia->br, copia2->trechoDaBr, copia2->tipo, copia2->upvotes);
+            fprintf(salvo, "%d;%.1f;%c;%d\n", copia->br, copia2->trechoDaBr, copia2->tipo, copia2->upvotes);
             copia2 = copia2->proximo;
         }
         copia = copia->proximo;
     }
     printf("Arquivo salvo com sucesso!");
     fclose(salvo);
+}
+
+void compararArquivos (Estrada **listaConsolidadaPonteiro, Estrada *listaNovosAlertas) {
+    Estrada *brNova = listaNovosAlertas;
+    while (brNova != NULL) {
+        Trecho *trechoNovo = brNova->inicioTrecho;
+        while (trechoNovo != NULL) {
+            processarArquivo(listaConsolidadaPonteiro,
+                             brNova->br,
+                             trechoNovo->trechoDaBr,
+                             trechoNovo->tipo,
+                             trechoNovo->upvotes);
+            trechoNovo = trechoNovo->proximo;
+        }
+        brNova = brNova->proximo;
+    }
+}
+
+void liberarLista(Estrada *lista) {
+    Estrada *brAtual = lista;
+    Estrada *tempBR;
+    Trecho *trechoAtual;
+    Trecho *tempTrecho;
+    while (brAtual != NULL) {
+        trechoAtual = brAtual->inicioTrecho;
+        while (trechoAtual != NULL) {
+            tempTrecho = trechoAtual;
+            trechoAtual = trechoAtual->proximo;
+            free(tempTrecho);
+        }
+        tempBR = brAtual;
+        brAtual = brAtual->proximo;
+        free(tempBR);
+    }
 }
