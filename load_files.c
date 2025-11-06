@@ -68,32 +68,20 @@ Estrada* carregarArquivo (char nomeArquivo[]){
 void processarArquivo (Estrada **estradasPonteiro, int br, float trechoDaBr, char tipo, int upvotesParaAdicionar) {
     Estrada *copia = *estradasPonteiro;
     Estrada *ultimoNoBR = NULL;
-
     while (copia != NULL) {
         if (br == copia->br) {
             Trecho *copia2 = copia->inicioTrecho;
             Trecho *copia3 = NULL;
-
-            if (copia2 == NULL) {
-                Trecho *noTrecho = (Trecho*) malloc(sizeof(Trecho));
-                noTrecho->tipo = tipo;
-                noTrecho->trechoDaBr = trechoDaBr;
-                noTrecho->upvotes = upvotesParaAdicionar;
-                noTrecho->proximo = NULL;
-                copia->inicioTrecho = noTrecho;
-                return;
-            }
-
             while (copia2 != NULL) {
-                if (trechoDaBr == copia2->trechoDaBr) {
+                if (trechoDaBr == copia2->trechoDaBr && tipo == copia2->tipo) {
                     copia2->upvotes += upvotesParaAdicionar;
                     return;
                 }
                 copia3 = copia2;
                 copia2 = copia2->proximo;
             }
-
             Trecho *noTrecho = (Trecho*) malloc(sizeof(Trecho));
+            if (!noTrecho) { printf("Erro de alocacao (Trecho)\n"); return; }
             noTrecho->tipo = tipo;
             noTrecho->trechoDaBr = trechoDaBr;
             noTrecho->upvotes = upvotesParaAdicionar;
@@ -132,6 +120,7 @@ void processarArquivo (Estrada **estradasPonteiro, int br, float trechoDaBr, cha
     }
     return;
 }
+
 
 Estrada* carregarConsolidado(char nomeConsolidado[]){
     FILE *consolidado = fopen(nomeConsolidado, "r");
