@@ -12,11 +12,11 @@ printf("1 - Carregar e processar novos arquivos\n2 - Consultar trechos especific
 printf("Porfavor, selecione sua opcao: ");
 int escolha;
 scanf("%d", &escolha);
+getchar();
 switch (escolha){
 case 1:
     printf("Porfavor, digite o nome (junto da extensao) do arquivo a ser carregado: ");
     char nomeArquivo[200];
-    getchar();
     fgets(nomeArquivo, 200, stdin);
     nomeArquivo[strcspn(nomeArquivo, "\n")] = '\0';
     char nomeConsolidado[] = "dadosConsolidados.csv";
