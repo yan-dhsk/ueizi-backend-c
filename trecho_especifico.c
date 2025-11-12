@@ -17,7 +17,7 @@ char campo3='x';
 
 fscanf(arquivo, "%*[^\n]\n");
 fprintf(avisos, "br;km;tipoAlerta;upvotes \n");
-while(fscanf(arquivo, " %d;%f;%c;%d%*c", &campo1, &campo2, &campo3, &campo4) == 4){
+while(fscanf(arquivo, " %d;%f;%c;%d\n", &campo1, &campo2, &campo3, &campo4) == 4){
         if(campo1==br && campo2>=trecho1 && campo2<=trecho2){
             fprintf(avisos, "%d;%.1f;%c;%d\n", campo1, campo2, campo3, campo4);
             }
