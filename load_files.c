@@ -23,22 +23,10 @@ void compararArquivos (Estrada **listaConsolidadaPonteiro, Estrada *listaNovosAl
 void salvarArquivo(Estrada *estrada, char nomeConsolidado[]);
 void liberarLista(Estrada *lista);
 
-void main(){
-    char nomeArquivo[] = "alertas_100000_1.csv";
-    char nomeConsolidado[] = "dadosConsolidados.csv";
-
-    Estrada *listaConsolidada = carregarConsolidado(nomeConsolidado);
-    Estrada *listaNovosAlertas = carregarArquivo(nomeArquivo);
-    compararArquivos(&listaConsolidada, listaNovosAlertas);
-    salvarArquivo(listaConsolidada, nomeConsolidado);
-    liberarLista(listaConsolidada);
-    liberarLista(listaNovosAlertas);
-}
-
 Estrada* carregarArquivo (char nomeArquivo[]){
     FILE* carregado = fopen(nomeArquivo, "r");
     if (carregado == NULL){
-        printf("Nao foi possivel abrir o arquivo");
+        printf("Nao foi possivel abrir o arquivo\n");
         return NULL;
     }
     int lixo1, lixo2, br;
@@ -212,7 +200,7 @@ void salvarArquivo(Estrada *estrada, char nomeConsolidado[]){
         }
         copia = copia->proximo;
     }
-    printf("Arquivo salvo com sucesso!");
+    printf("Arquivo salvo com sucesso!\n");
     fclose(salvo);
 }
 

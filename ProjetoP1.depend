@@ -1,0 +1,91 @@
+# depslib dependency file v1.0
+1762826603 source:c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\teste\alertatodasbr.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1762891052 source:c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\teste\load_files.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1762827634 source:c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\teste\trecho_especifico.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1762891613 source:c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\teste\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"alertaTodasBr.h"
+	"trecho_especifico.h"
+	"load_files.h"
+
+1762821886 c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\teste\alertatodasbr.h
+
+1762821803 c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\teste\trecho_especifico.h
+
+1762823132 c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\teste\load_files.h
+
+1762826603 source:c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\projeto p1 (implementado)\alertatodasbr.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1762891052 source:c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\projeto p1 (implementado)\load_files.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1762892436 source:c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\projeto p1 (implementado)\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"alertaTodasBr.h"
+	"trecho_especifico.h"
+	"load_files.h"
+
+1762821886 c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\projeto p1 (implementado)\alertatodasbr.h
+
+1762821803 c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\projeto p1 (implementado)\trecho_especifico.h
+
+1762823132 c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\projeto p1 (implementado)\load_files.h
+
+1762827634 source:c:\users\yan\documents\estudo\upe\2° periodo\programação 1\projeto 1\projeto p1 (implementado)\trecho_especifico.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1762958282 source:c:\users\vini1\documents\projeto p1 (implementado)\projeto p1 (implementado)\alertatodasbr.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1762891052 source:c:\users\vini1\documents\projeto p1 (implementado)\projeto p1 (implementado)\load_files.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1762892436 source:c:\users\vini1\documents\projeto p1 (implementado)\projeto p1 (implementado)\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"alertaTodasBr.h"
+	"trecho_especifico.h"
+	"load_files.h"
+
+1762821886 c:\users\vini1\documents\projeto p1 (implementado)\projeto p1 (implementado)\alertatodasbr.h
+
+1762821803 c:\users\vini1\documents\projeto p1 (implementado)\projeto p1 (implementado)\trecho_especifico.h
+
+1762823132 c:\users\vini1\documents\projeto p1 (implementado)\projeto p1 (implementado)\load_files.h
+
+1762827634 source:c:\users\vini1\documents\projeto p1 (implementado)\projeto p1 (implementado)\trecho_especifico.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

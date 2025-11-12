@@ -34,7 +34,7 @@ while(fscanf(dados, "%d;%*f;%c;%d\n", &br, &tipo, &numAlertas)==3){
     else if(brAnterior!=0){
         tipagem(tipoAnterior, upvotes,numAlertasAnteriores);
         for(int x=0;x<6;x++){
-            fprintf(alertas, "%d,%c,%d\n", brAnterior, upvotes[x+6], upvotes[x]);}
+            fprintf(alertas, "%d;%c;%d\n", brAnterior, upvotes[x+6], upvotes[x]);}
         for(int x=0;x<6;x++){upvotes[x]=0;}}
 
     brAnterior=br;
@@ -47,12 +47,5 @@ for(int x=0;x<6;x++){
 
 fclose(dados);
 fclose(alertas);
-}
-
-int main(){
-
-char nomeArquivo[]="dadosConsolidados.csv";
-
-lerBrs(nomeArquivo);
 }
 

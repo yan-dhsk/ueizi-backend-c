@@ -17,7 +17,7 @@ char campo3='x';
 
 fscanf(arquivo, "%*[^\n]\n");
 fprintf(avisos, "br;km;tipoAlerta;upvotes \n");
-while(fscanf(arquivo, "%d;%f;%c;%d\n", &campo1, &campo2, &campo3, &campo4)==4){
+while(fscanf(arquivo, " %d;%f;%c;%d%*c", &campo1, &campo2, &campo3, &campo4) == 4){
         if(campo1==br && campo2>=trecho1 && campo2<=trecho2){
             fprintf(avisos, "%d;%.1f;%c;%d\n", campo1, campo2, campo3, campo4);
             }
@@ -25,12 +25,4 @@ while(fscanf(arquivo, "%d;%f;%c;%d\n", &campo1, &campo2, &campo3, &campo4)==4){
 fclose(avisos);
 fclose(arquivo);
 }
-int main(){
-int br;
-float trecho1, trecho2;
-char nomearquivo[]="dadosConsolidados.csv";
-printf("Digite a BR e o trecho especifico da br (Ex: 102(BR) 150(Inicio do trecho) 170(final do trecho))\n");
-scanf("%d %f %f", &br, &trecho1, &trecho2);
-ler(nomearquivo, br, trecho1, trecho2);}
-
 
